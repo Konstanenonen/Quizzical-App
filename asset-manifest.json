@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/animal-quizzical/static/css/main.b470f2b2.css",
-    "main.js": "/animal-quizzical/static/js/main.6e3f7d6a.js",
+    "main.js": "/animal-quizzical/static/js/main.dfcaff32.js",
     "index.html": "/animal-quizzical/index.html",
     "main.b470f2b2.css.map": "/animal-quizzical/static/css/main.b470f2b2.css.map",
-    "main.6e3f7d6a.js.map": "/animal-quizzical/static/js/main.6e3f7d6a.js.map"
+    "main.dfcaff32.js.map": "/animal-quizzical/static/js/main.dfcaff32.js.map"
   },
   "entrypoints": [
     "static/css/main.b470f2b2.css",
-    "static/js/main.6e3f7d6a.js"
+    "static/js/main.dfcaff32.js"
   ]
 }
