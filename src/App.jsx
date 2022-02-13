@@ -1,11 +1,9 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 import StartPage from './components/StartPage';
-import QuizArea from './components/QuizArea';
+import QuizPage from './components/QuizPage';
 
 function App() {
   const [start, setStart] = React.useState(false);
@@ -28,7 +26,7 @@ function App() {
               id: nanoid(),
             }
           ));
-          // Adding the correct asnwer together wit the wrong ones to make the shuffling easier
+          // Adding the correct asnwer together with the wrong ones to make the shuffling easier
           answers.push({
             chosen: false,
             correct: true,
@@ -48,16 +46,6 @@ function App() {
       });
   }, [startNewGame]);
 
-  const quizAreas = questions.map((item) => (
-    <QuizArea
-      key={item[0].question}
-      question={item[0].question}
-      answers={item.slice(1)}
-      chooseAnswer={chooseAnswer}
-      showResults={showResults}
-    />
-  ));
-
   function chooseAnswer(id) {
     setQuestions((prevState) => prevState.map((questionsArray) => (
       questionsArray.map((answer) => (
@@ -67,8 +55,9 @@ function App() {
   }
 
   function playAgain() {
-    setShowResults(false);
     setStartNewGame((prevState) => !prevState);
+    setQuestions([]);
+    setShowResults(false);
   }
 
   function checkAnswers() {
@@ -77,7 +66,7 @@ function App() {
 
   const correctAnswers = questions.filter((answerArray) => {
     let boolean = false;
-    for (let i = 0; i < answerArray.length; i++) {
+    for (let i = 0; i < answerArray.length; i += 1) {
       if (answerArray[i].correct && answerArray[i].chosen) {
         boolean = true;
       }
@@ -87,19 +76,19 @@ function App() {
 
   return (
     <div className="app--container">
-      { !start
-        ? <StartPage start={() => setStart(true)} />
-        : (
-          <div>
-            {quizAreas}
-            {showResults ? (
-              <div className="flex-box">
-                <p>{`You scored ${correctAnswers}/5 correct answers`}</p>
-                <button onClick={playAgain} type="button">Play Again</button>
-              </div>
-            ) : <div className="flex-box"><button className="check-answers" onClick={checkAnswers} type="button">Check answers</button></div>}
-          </div>
-        ) }
+      {showResults && correctAnswers === 5 && <Confetti height="750px" />}
+      {!start ? (
+        <StartPage start={() => setStart(true)} />
+      ) : (
+        <QuizPage
+          questions={questions}
+          showResults={showResults}
+          correctAnswers={correctAnswers}
+          checkAnswers={checkAnswers}
+          playAgain={playAgain}
+          chooseAnswer={chooseAnswer}
+        />
+      )}
     </div>
   );
 }
