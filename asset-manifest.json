@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/animal-quizzical/static/css/main.995429b0.css",
-    "main.js": "/animal-quizzical/static/js/main.dfcaff32.js",
-    "index.html": "/animal-quizzical/index.html",
-    "main.995429b0.css.map": "/animal-quizzical/static/css/main.995429b0.css.map",
-    "main.dfcaff32.js.map": "/animal-quizzical/static/js/main.dfcaff32.js.map"
+    "main.css": "/Quizzical-App/static/css/main.995429b0.css",
+    "main.js": "/Quizzical-App/static/js/main.dfcaff32.js",
+    "index.html": "/Quizzical-App/index.html",
+    "main.995429b0.css.map": "/Quizzical-App/static/css/main.995429b0.css.map",
+    "main.dfcaff32.js.map": "/Quizzical-App/static/js/main.dfcaff32.js.map"
   },
   "entrypoints": [
     "static/css/main.995429b0.css",
