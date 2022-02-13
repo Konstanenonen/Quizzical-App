@@ -18,30 +18,40 @@ function App() {
       .then((data) => {
         // Filtering the fetched data for easier form manipulation
         // eslint-disable-next-line arrow-body-style
+        const doubleQuote = /&quot;/g;
+        const singleQuote = /&#039;/g;
+        const amp = /&amp;/g;
+        const ldquo = /&ldquo;/g;
+        const rqduo = /&rdquo;/g;
         const getQuestions = data.results.map((question) => {
-          const answers = question.incorrect_answers.map((answer) => (
-            {
+          const answers = question.incorrect_answers.map((answer) => {
+            const filteredAnswer = answer.replace(doubleQuote, '"')
+              .replace(singleQuote, "'")
+              .replace(amp, '&')
+              .replace(ldquo, '"')
+              .replace(rqduo, '"');
+            return ({
               chosen: false,
               correct: false,
-              answer,
+              answer: filteredAnswer,
               id: nanoid(),
-            }
-          ));
+            });
+          });
           // Adding the correct asnwer together with the wrong ones to make the shuffling easier
+          const filteredAnswer = question.correct_answer.replace(doubleQuote, '"')
+            .replace(singleQuote, "'")
+            .replace(amp, '&')
+            .replace(ldquo, '"')
+            .replace(rqduo, '"');
           answers.push({
             chosen: false,
             correct: true,
-            answer: question.correct_answer,
+            answer: filteredAnswer,
             id: nanoid(),
           });
           // This makes the answer order random, so correct answer isn't in known place
           answers.sort(() => Math.random() - 0.5);
           // Fixing quotes
-          const doubleQuote = /&quot;/g;
-          const singleQuote = /&#039;/g;
-          const amp = /&amp;/g;
-          const ldquo = /&ldquo;/g;
-          const rqduo = /&rdquo;/g;
           const questionFixedQuotes = question.question.replace(doubleQuote, '"')
             .replace(singleQuote, "'")
             .replace(amp, '&')
