@@ -4,7 +4,14 @@ import QuizArea from './QuizArea';
 
 export default function QuizPage(props) {
   const {
-    questions, chooseAnswer, showResults, correctAnswers, playAgain, checkAnswers,
+    questions,
+    chooseAnswer,
+    showResults,
+    correctAnswers,
+    playAgain,
+    checkAnswers,
+    backToCategories,
+    setQuestions,
   } = props;
 
   const quizAreas = questions.map((item) => (
@@ -25,6 +32,16 @@ export default function QuizPage(props) {
           <p>{`You scored ${correctAnswers}/5 correct answers`}</p>
           <button onClick={playAgain} type="button">
             Play Again
+          </button>
+          <button
+            onClick={() => {
+              backToCategories();
+              checkAnswers();
+              setQuestions([]);
+            }}
+            type="button"
+          >
+            Back to Menu
           </button>
         </div>
       ) : (

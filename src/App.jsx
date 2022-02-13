@@ -7,12 +7,13 @@ import QuizPage from './components/QuizPage';
 
 function App() {
   const [start, setStart] = React.useState(false);
-  const [showResults, setShowResults] = React.useState(false);
+  const [questionCategory, setQuestionCategory] = React.useState('');
   const [questions, setQuestions] = React.useState([]);
+  const [showResults, setShowResults] = React.useState(false);
   const [startNewGame, setStartNewGame] = React.useState([]);
 
   useEffect(() => {
-    fetch('https://opentdb.com/api.php?amount=5&category=27&type=multiple')
+    fetch(questionCategory)
       .then((response) => response.json())
       .then((data) => {
         // Filtering the fetched data for easier form manipulation
@@ -38,13 +39,20 @@ function App() {
           // Fixing quotes
           const doubleQuote = /&quot;/g;
           const singleQuote = /&#039;/g;
-          const questionFixedQuotes = question.question.replace(doubleQuote, '"').replace(singleQuote, "'");
+          const amp = /&amp;/g;
+          const ldquo = /&ldquo;/g;
+          const rqduo = /&rdquo;/g;
+          const questionFixedQuotes = question.question.replace(doubleQuote, '"')
+            .replace(singleQuote, "'")
+            .replace(amp, '&')
+            .replace(ldquo, '"')
+            .replace(rqduo, '"');
           answers.unshift({ question: questionFixedQuotes });
           return answers;
         });
         setQuestions(getQuestions);
       });
-  }, [startNewGame]);
+  }, [startNewGame, questionCategory]);
 
   function chooseAnswer(id) {
     setQuestions((prevState) => prevState.map((questionsArray) => (
@@ -61,7 +69,7 @@ function App() {
   }
 
   function checkAnswers() {
-    setShowResults(true);
+    setShowResults((prevState) => !prevState);
   }
 
   const correctAnswers = questions.filter((answerArray) => {
@@ -76,17 +84,19 @@ function App() {
 
   return (
     <div className="app--container">
-      {showResults && correctAnswers === 5 && <Confetti height="750px" />}
+      {showResults && correctAnswers === 5 && <Confetti height="2000px" />}
       {!start ? (
-        <StartPage start={() => setStart(true)} />
+        <StartPage start={() => setStart(true)} setQuestionCategory={setQuestionCategory} />
       ) : (
         <QuizPage
           questions={questions}
+          setQuestions={setQuestions}
           showResults={showResults}
           correctAnswers={correctAnswers}
           checkAnswers={checkAnswers}
           playAgain={playAgain}
           chooseAnswer={chooseAnswer}
+          backToCategories={() => setStart(false)}
         />
       )}
     </div>
