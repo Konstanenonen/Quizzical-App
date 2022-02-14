@@ -7,7 +7,7 @@ export default function StartPage(props) {
   return (
     <div className="startPage--container">
       <h1>Quizzical</h1>
-      <h2>Choose question category</h2>
+      <h2>Choose a category.</h2>
       <div className="category-container">
         <button type="button" onClick={() => { setQuestionCategory('https://opentdb.com/api.php?amount=5&category=27&type=multiple'); start(); }}>Animals</button>
         <button type="button" onClick={() => { setQuestionCategory('https://opentdb.com/api.php?amount=5&category=12&type=multiple'); start(); }}>Music</button>
@@ -22,6 +22,9 @@ export default function StartPage(props) {
         <button type="button" onClick={() => { setQuestionCategory('https://opentdb.com/api.php?amount=5&category=22&type=multiple'); start(); }}>Geography</button>
         <button type="button" onClick={() => { setQuestionCategory('https://opentdb.com/api.php?amount=5&category=32&type=multiple'); start(); }}>Cartoons</button>
       </div>
+      <p>Quizzical is a front-end web application for</p>
+      <a href="https://opentdb.com/">Open Trivia Database API</a>
+      <p>made with React.js</p>
     </div>
   );
 }

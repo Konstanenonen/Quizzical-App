@@ -59,6 +59,15 @@ body {
       color: #f5f7fb;
     }
   }
+
+  p {
+    color: #293264;
+    text-align: center;
+  }
+
+  a {
+    color: #223396;
+  }
 }
 
 .quiz-container {
@@ -129,6 +138,7 @@ body {
 @media only screen and (max-width: 600px) {
   .app--container {
     margin-top: 50px;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
   }
@@ -171,6 +181,14 @@ body {
       text-align: center;
       color: #f5f7fb;
     }
+
+    p {
+      color: #293264;
+    }
+
+    a {
+      color: #223396;
+    }
   }
 
   .quiz-container {
@@ -196,6 +214,7 @@ body {
     text-align: center;
     color: #293264;
     margin-bottom: 15px;
+    margin-left: 15px;
   }
 
   .question {
