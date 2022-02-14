@@ -22,7 +22,7 @@ export default function StartPage(props) {
         <button type="button" onClick={() => { setQuestionCategory((prevState) => ({ url: 'https://opentdb.com/api.php?amount=5&category=22&type=multiple', roundCount: prevState.roundCount + 1 })); start(); }}>Geography</button>
         <button type="button" onClick={() => { setQuestionCategory((prevState) => ({ url: 'https://opentdb.com/api.php?amount=5&category=32&type=multiple', roundCount: prevState.roundCount + 1 })); start(); }}>Cartoons</button>
       </div>
-      <p>Quizzical is a front-end web application</p>
+      <p>Quizzical is a front-end web application that uses</p>
       <a href="https://opentdb.com/">Open Trivia Database API</a>
       <p>made with React.js</p>
     </div>
