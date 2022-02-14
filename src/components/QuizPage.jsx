@@ -37,7 +37,13 @@ export default function QuizPage(props) {
             onClick={() => {
               backToCategories();
               checkAnswers();
-              setQuestions([]);
+              setQuestions([
+                [
+                  {
+                    question: 'Loading...',
+                  },
+                ],
+              ]);
             }}
             type="button"
           >

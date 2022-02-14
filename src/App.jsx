@@ -5,15 +5,14 @@ import Confetti from 'react-confetti';
 import StartPage from './components/StartPage';
 import QuizPage from './components/QuizPage';
 
-function App() {
+export default function App() {
   const [start, setStart] = React.useState(false);
-  const [questionCategory, setQuestionCategory] = React.useState('');
+  const [questionCategory, setQuestionCategory] = React.useState({ url: 'jiit', roundCount: 0 });
   const [questions, setQuestions] = React.useState([]);
   const [showResults, setShowResults] = React.useState(false);
-  const [startNewGame, setStartNewGame] = React.useState([]);
 
   useEffect(() => {
-    fetch(questionCategory)
+    fetch(questionCategory.url)
       .then((response) => response.json())
       .then((data) => {
         // Filtering the fetched data for easier form manipulation
@@ -62,7 +61,7 @@ function App() {
         });
         setQuestions(getQuestions);
       });
-  }, [startNewGame, questionCategory]);
+  }, [questionCategory]);
 
   function chooseAnswer(id) {
     setQuestions((prevState) => prevState.map((questionsArray) => (
@@ -73,15 +72,27 @@ function App() {
   }
 
   function playAgain() {
-    setStartNewGame((prevState) => !prevState);
-    setQuestions([]);
+    setQuestions([
+      [
+        {
+          question: 'Loading...',
+        },
+      ],
+    ]);
     setShowResults(false);
+    setQuestionCategory((prevState) => ({
+      ...prevState,
+      count: prevState.count + 1,
+    }));
+    setShowResults(false);
+    setQuestionCategory((prevState) => ({ ...prevState, roundCount: prevState.roundCount + 1 }));
   }
 
   function checkAnswers() {
     setShowResults((prevState) => !prevState);
   }
 
+  // Counting correct answers to display for user after the quizz
   const correctAnswers = questions.filter((answerArray) => {
     let boolean = false;
     for (let i = 0; i < answerArray.length; i += 1) {
@@ -109,8 +120,10 @@ function App() {
           backToCategories={() => setStart(false)}
         />
       )}
+      <div className="rounds-container">
+        <p>Rounds played:</p>
+        <p>{questionCategory.roundCount}</p>
+      </div>
     </div>
   );
 }
-
-export default App;

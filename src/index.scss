@@ -135,6 +135,17 @@ body {
   }
 }
 
+.rounds-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin-right: 5px;
+    color: #293264;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .app--container {
     margin-top: 50px;
@@ -258,6 +269,17 @@ body {
       text-align: center;
       color: #293264;
       margin-right: 25px;
+    }
+  }
+
+  .rounds-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    p {
+      margin-right: 5px;
+      color: #293264;
     }
   }
 }
