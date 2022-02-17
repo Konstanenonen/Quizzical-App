@@ -79,7 +79,6 @@ export default function App() {
         },
       ],
     ]);
-    setShowResults(false);
     setQuestionCategory((prevState) => ({
       ...prevState,
       count: prevState.count + 1,
