@@ -7,7 +7,7 @@ import QuizPage from './components/QuizPage';
 
 export default function App() {
   const [start, setStart] = React.useState(false);
-  const [questionCategory, setQuestionCategory] = React.useState({ url: 'jiit', roundCount: 0 });
+  const [questionCategory, setQuestionCategory] = React.useState({ url: '', roundCount: 0 });
   const [questions, setQuestions] = React.useState([]);
   const [showResults, setShowResults] = React.useState(false);
 
@@ -79,10 +79,6 @@ export default function App() {
         },
       ],
     ]);
-    setQuestionCategory((prevState) => ({
-      ...prevState,
-      count: prevState.count + 1,
-    }));
     setShowResults(false);
     setQuestionCategory((prevState) => ({ ...prevState, roundCount: prevState.roundCount + 1 }));
   }
@@ -104,7 +100,7 @@ export default function App() {
 
   return (
     <div className="app--container">
-      {showResults && correctAnswers === 5 && <Confetti height="2000px" />}
+      {showResults && correctAnswers === 5 && <Confetti height="4000px" />}
       {!start ? (
         <StartPage start={() => setStart(true)} setQuestionCategory={setQuestionCategory} />
       ) : (
